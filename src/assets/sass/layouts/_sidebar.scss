@@ -1,0 +1,93 @@
+.sidebar {
+  background-color: var(--color-primary);
+  grid-column: sidebar-start / sidebar-end;
+  grid-row: 1 / -1;
+  display: grid;
+  @media only screen and (max-width: $bp-large) {
+    grid-column: 1 / -1;
+    grid-row: 1 / 2;
+    justify-content: end;
+  }
+  & > * {
+    margin: 0 auto;
+    transition: all 0.9s ease-out;
+    @media only screen and (max-width: $bp-large) {
+      margin: 0;
+    }
+  }
+
+  &__nav-checkbox:checked ~ .nav-overlay {
+    position: fixed;
+    background-color: var(--color-secondary);
+    height: 100vh;
+    width: 100vw;
+    z-index: 4;
+  }
+
+  &__nav-checkbox {
+    display: none;
+
+    &:checked ~ .sidebar__nav-btn::before {
+      transition: all 0.2s ease-out;
+      transform: translateY(0.2rem) rotate(-45deg);
+    }
+    &:checked ~ .sidebar__nav-btn::after {
+      transition: all 0.2s ease-out;
+      transform: translateY(0) rotate(45deg);
+    }
+    &:checked ~ .sidebar__nav-btn {
+      transition: all ease-out;
+      background-color: transparent;
+    }
+  }
+
+  &__nav-label {
+    height: 5rem;
+    width: 5.7rem;
+    position: absolute;
+    top: 1.7rem;
+    left: 1.3rem;
+    z-index: 6;
+    @media only screen and (max-width: $bp-large) {
+      top: 0;
+      left: 80vw;
+      width: 20.7rem;
+    }
+  }
+  &__nav-btn {
+    border: none;
+    border-radius: 0;
+    grid-row: 1 / -1;
+    background-color: #fff;
+    height: 2px;
+    width: 4.5rem;
+    margin-top: 4rem;
+    z-index: 5;
+    &::before,
+    &::after {
+      background-color: #fff;
+      content: "";
+      height: 2px;
+      width: 4.5rem;
+      display: block;
+    }
+    &::before {
+      transform: translateY(-1.5rem);
+    }
+    &::after {
+      transform: translateY(1.3rem);
+    }
+
+    @media only screen and (max-width: $bp-large) {
+      margin-top: 2.8rem;
+      margin-right: 3rem;
+
+      &::before {
+        transform: translateY(-1.2rem);
+      }
+      &::after {
+        transform: translateY(1rem);
+      }
+    }
+  }
+}
